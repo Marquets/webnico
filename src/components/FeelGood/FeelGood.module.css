@@ -1,0 +1,57 @@
+.feature {
+  position: relative;
+  scroll-snap-align: start;
+}
+
+.band {
+  position: relative;
+  height: 100svh;
+}
+
+/* The wall was extended to the left to fit the wide band. */
+.photo {
+  position: absolute;
+  inset: 0;
+  background-image: url("/wall-wide.jpg");
+  background-size: cover;
+  background-position: 88% center;
+}
+
+/* Sits on the bare wall, clear of Nicolás on the right. */
+.copy {
+  position: absolute;
+  top: 50%;
+  left: 18%;
+  width: min(52%, 34rem);
+  transform: translateY(-50%);
+  color: #fff;
+  text-shadow: 0 1px 14px rgba(10, 8, 6, 0.55);
+}
+
+.lead {
+  font-family: var(--hand);
+  font-size: clamp(1rem, 2.2vw, 1.9rem);
+  line-height: 1.35;
+}
+
+/* Portrait crops to Nicolás, so the text drops to the foot of the photo over a shade. */
+@media (max-width: 640px) {
+  .band {
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .photo {
+    background-position: 84% center;
+  }
+
+  .copy {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+    padding: 5rem 1.5rem 2.5rem;
+    background: linear-gradient(to bottom, transparent, rgba(10, 8, 6, 0.6));
+  }
+}

@@ -1,0 +1,23 @@
+.footer {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem clamp(1rem, 3vw, 2.5rem);
+  padding: clamp(1.5rem, 3vw, 2rem) var(--gutter);
+  border-top: 1px solid rgba(255, 255, 255, 0.35);
+  color: #fff;
+  text-shadow: 0 1px 8px rgba(38, 26, 16, 0.35);
+}
+
+.name {
+  opacity: 0.8;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(1rem, 3vw, 2.5rem);
+  opacity: 0.9;
+}

@@ -1,0 +1,6 @@
+node_modules
+dist
+*.tsbuildinfo
+.DS_Store
+# Material en bruto (fotos originales, docx, tipografía): 40 MB, se queda solo en local
+Web Nico/

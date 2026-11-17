@@ -1,0 +1,78 @@
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 4vw, 3rem);
+  justify-content: space-between;
+  padding: clamp(1.4rem, 3vw, 2.2rem) var(--gutter);
+  transition: padding 0.4s ease, color 0.4s ease, transform 0.45s ease, opacity 0.3s ease;
+}
+
+.hidden {
+  transform: translateY(-110%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* No bar: the links sit straight on whatever is behind them. */
+.overHero {
+  color: #fff;
+  text-shadow: 0 1px 12px rgba(6, 30, 46, 0.5);
+}
+
+.solid {
+  color: var(--wash-black);
+  padding-top: 0.9rem;
+  padding-bottom: 0.9rem;
+}
+
+/* Centred in the bar whatever flanks it. */
+.links {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: clamp(1.25rem, 3.5vw, 3rem);
+}
+
+.link {
+  font-family: var(--hand);
+  font-size: clamp(0.85rem, 1.2vw, 1.05rem);
+  letter-spacing: 0.08em;
+  /* The font ships in one weight only; a stroke thickens it without faux-bold smearing. */
+  -webkit-text-stroke: 0.04em currentColor;
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 0.88;
+  transition: opacity 0.25s ease;
+}
+
+.overHero .link {
+  text-shadow: 0 1px 10px rgba(6, 30, 46, 0.5);
+}
+
+.link:hover,
+.link:focus-visible {
+  opacity: 1;
+}
+
+@media (max-width: 780px) {
+  /* Right-aligned and wrapping, clear of the logo parked on the left. */
+  .links {
+    position: static;
+    transform: none;
+    margin-left: auto;
+    max-width: calc(100% - 6rem);
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.5rem 1rem;
+  }
+
+  .link {
+    font-size: 0.75rem;
+  }
+}

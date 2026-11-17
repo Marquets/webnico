@@ -1,0 +1,55 @@
+.hero {
+  position: relative;
+  min-height: 100svh;
+  scroll-snap-align: start;
+  isolation: isolate;
+  z-index: 1;
+}
+
+.water {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+/* Centred over the water, then parked in the corner as a plain eye. */
+.mark {
+  display: block;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: clamp(16rem, 36vw, 28rem);
+  transform: translate(-50%, -52%);
+  z-index: 9;
+  color: #fff;
+  filter: drop-shadow(0 2px 18px rgba(6, 30, 46, 0.45));
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1), top 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+    left 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.5s ease, filter 0.5s ease;
+}
+
+.markCompact {
+  width: clamp(5rem, 8vw, 6.5rem);
+  top: clamp(1.1rem, 2.4vw, 1.7rem);
+  left: var(--gutter);
+  transform: translate(0, 0);
+  /* Difference keeps the eye readable over sand, navy and photographs alike. */
+  color: #fff;
+  mix-blend-mode: difference;
+  filter: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mark {
+    transition: none;
+  }
+}
+
+.scrollCue {
+  position: absolute;
+  z-index: 1;
+  bottom: clamp(1.5rem, 4vw, 3rem);
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(253, 249, 238, 0.72);
+}
