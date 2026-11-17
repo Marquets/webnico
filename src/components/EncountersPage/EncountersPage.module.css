@@ -1,7 +1,15 @@
+/* The whole page sits on one photo of dappled shade, darkened enough for the words to read straight on it. */
 .page {
   --forest: #2b3526;
-  background: var(--forest);
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  background:
+    linear-gradient(rgba(28, 36, 24, 0.55), rgba(28, 36, 24, 0.68)),
+    url("/encuentros/sombras.jpg") center / cover no-repeat fixed;
+  background-color: var(--forest);
   color: #fff;
+  text-shadow: 0 1px 12px rgba(20, 26, 17, 0.6);
 }
 
 /* Same spot and size as the parked logo on the home page. */
@@ -14,141 +22,110 @@
   mix-blend-mode: difference;
 }
 
-/* The dappled light is busy, so the intro sits on a frosted forest panel. */
-.hero {
-  min-height: 100svh;
-  scroll-snap-align: start;
+.main {
+  flex: 1;
   display: grid;
-  place-items: center;
-  padding: clamp(6rem, 10vw, 8rem) var(--gutter);
-  background: url("/encuentros/sombras.jpg") center / cover no-repeat;
+  justify-items: center;
+  align-content: center;
+  gap: clamp(3rem, 7vw, 5.5rem);
+  padding: clamp(8rem, 13vw, 10rem) var(--gutter) clamp(3rem, 6vw, 4.5rem);
 }
 
 .intro {
-  display: grid;
-  gap: 1.5rem;
-  max-width: 50rem;
-  padding: clamp(2rem, 5vw, 3.5rem) clamp(1.5rem, 5vw, 4rem);
-  border-radius: 24px;
-  background: rgba(43, 53, 38, 0.38);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  text-shadow: 0 1px 12px rgba(20, 26, 17, 0.7);
+  max-width: 34rem;
+  margin: 0;
   text-align: center;
-  font-size: clamp(1.05rem, 1.4vw, 1.2rem);
-  line-height: 1.75;
-}
-
-.title {
-  font-size: clamp(2.4rem, 5vw, 4rem);
-}
-
-.screen {
-  min-height: 100svh;
-  scroll-snap-align: start;
-  display: grid;
-  place-items: center;
-  padding: clamp(5.5rem, 8vw, 6.5rem) var(--gutter) clamp(1rem, 2vw, 1.5rem);
-  background: url("/encuentros/grupo.jpg") center / cover no-repeat;
+  font-size: clamp(1rem, 1.35vw, 1.15rem);
+  line-height: 1.8;
 }
 
 .pair {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: clamp(1rem, 2vw, 1.5rem);
-  width: min(100%, 76rem);
+  gap: clamp(2.5rem, 7vw, 6rem);
+  width: min(100%, 64rem);
 }
 
-/* The botanical prints are busy, so each block reads from a translucent green panel. */
 .block {
   display: grid;
   align-content: start;
-  gap: 1rem;
-  padding: clamp(1.75rem, 3vw, 2.5rem) clamp(1.25rem, 3.5vw, 3rem);
-  border-radius: 24px;
-  background: rgba(38, 54, 32, 0.62);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  text-align: center;
-  font-size: clamp(0.98rem, 1.15vw, 1.08rem);
-  line-height: 1.6;
+  gap: 1.1rem;
+  font-size: clamp(0.92rem, 1.1vw, 1rem);
+  line-height: 1.7;
 }
 
+.block p {
+  margin: 0;
+}
+
+/* The two kinds of encounter carry a soft blue halo, as Nico suggested. */
 .heading {
-  font-size: clamp(1.6rem, 2.6vw, 2.2rem);
-  line-height: 1.2;
+  margin: 0 0 0.4rem;
+  text-align: center;
+  font-family: var(--hand);
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  line-height: 1.25;
+  text-shadow:
+    0 0 18px rgba(120, 165, 230, 0.75),
+    0 0 42px rgba(90, 140, 220, 0.45);
 }
 
 .lead {
-  font-family: var(--hand);
-  font-size: clamp(1.15rem, 1.7vw, 1.4rem);
-  line-height: 1.4;
+  text-align: center;
 }
 
 .column {
   display: grid;
-  gap: 0.75rem;
-  text-align: left;
+  gap: 0.5rem;
+  margin-top: 0.6rem;
 }
 
 .columnTitle {
-  font-size: clamp(1.2rem, 1.7vw, 1.45rem);
+  margin: 0;
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.85;
 }
 
 .offers {
   display: grid;
-  gap: 0.6rem;
+  gap: 0.35rem;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.offers li {
+.ask {
   display: grid;
-  justify-items: start;
-  gap: 0.1rem;
-  padding-top: 0.6rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  justify-items: center;
+  gap: 0.6rem;
+  margin: 0;
+  font-family: var(--hand);
+  font-size: clamp(1.1rem, 1.6vw, 1.3rem);
 }
 
-.offerName {
-  line-height: 1.45;
-}
-
-.offerDetail {
-  font-size: 0.9em;
-  opacity: 0.7;
-}
-
-.soon {
-  margin-top: 0.3rem;
-  padding: 0.1rem 0.7rem;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.14);
-  font-size: 0.75em;
+.phone {
+  font-family: var(--sans);
+  font-size: 0.85em;
   letter-spacing: 0.08em;
-  text-transform: uppercase;
+  opacity: 0.9;
 }
 
-.journeys {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.5rem;
-  margin: 0.5rem 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.journeys li {
-  padding: 0.4rem 1.1rem;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.1);
-  font-size: 0.95em;
+.phone:hover,
+.phone:focus-visible {
+  opacity: 1;
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
 }
 
 @media (max-width: 700px) {
   .pair {
     grid-template-columns: 1fr;
+  }
+
+  /* iOS ignores fixed backgrounds and blows them up instead. */
+  .page {
+    background-attachment: scroll;
   }
 }

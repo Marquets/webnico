@@ -5,16 +5,18 @@ import { BrandMark } from "../BrandMark/BrandMark";
 import { CausticPool } from "../CausticPool/CausticPool";
 import styles from "./Hero.module.css";
 
-// Rain on deep water: many small drops, and with the water this dark the floor
-// is gone, so the texture comes off the surface — sky in the facets, sun on the
-// rings. No ghost cursor: one wandering ring reads as an object crossing the pool.
+// A finger touching still water: one point, one clean ring at a steady beat,
+// nothing else stirring. With the water this dark the floor is gone, so the
+// texture comes off the surface — sky in the facets, sun on the rings.
 const OPEN_WATER = {
-  ambient: true,
-  ambientCount: 5,
-  ambientStrength: 0.02,
-  ambientRate: 0.5,
+  ambient: false,
+  propagation: 0.08,
+  pulsePeriod: 1.6,
+  pulseX: 0.5,
+  pulseY: 0.5,
+  ambientStrength: 0.045,
   ambientRadius: 0.02,
-  damping: 0.99,
+  damping: 0.999,
   ghost: false,
 
   causticA: 15,

@@ -13,6 +13,10 @@ export type CausticParams = {
   ambientStrength: number;
   ambientRate: number;
   ambientRadius: number;
+  /** Seconds between rings from one fixed point; 0 turns it off. */
+  pulsePeriod: number;
+  pulseX: number;
+  pulseY: number;
   ghost: boolean;
   ghostFade: number;
   ghostSpeed: number;
@@ -87,6 +91,9 @@ export const CAUSTIC_DEFAULTS: CausticParams = {
   ambientStrength: 0.018,
   ambientRate: 1,
   ambientRadius: 0.04,
+  pulsePeriod: 0,
+  pulseX: 0.5,
+  pulseY: 0.5,
 
   ghost: true,
   ghostFade: 1.5,
@@ -233,7 +240,10 @@ void main(){
   float r = texture(uState, uv + vec2(uTexel.x, 0.0)).r;
   float u = texture(uState, uv + vec2(0.0, uTexel.y)).r;
   float d = texture(uState, uv - vec2(0.0, uTexel.y)).r;
-  float nv = (2.0 * c - p) + (l + r + u + d - 4.0 * c) * uPropagation;
+  // The square grid is stretched over a wide canvas, so slow the waves across
+  // by the aspect or every ring comes out as an ellipse.
+  float ax = 1.0 / (uAspect * uAspect);
+  float nv = (2.0 * c - p) + ((l + r - 2.0 * c) * ax + (u + d - 2.0 * c)) * uPropagation;
   nv *= uDamping;
   for (int i = 0; i < ${MAX_DROPS}; i++) {
     if (i >= uDropCount) break;

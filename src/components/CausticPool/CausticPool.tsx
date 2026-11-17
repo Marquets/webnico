@@ -281,9 +281,20 @@ export function CausticPool({
       ghostY = gy;
     };
 
+    let pulseIn = 0;
+    const stirPulse = (step: number) => {
+      const p = paramsRef.current;
+      if (p.pulsePeriod <= 0) return;
+      pulseIn -= step;
+      if (pulseIn > 0) return;
+      pulseIn = p.pulsePeriod;
+      drop(p.pulseX, p.pulseY, p.ambientStrength, p.ambientRadius);
+    };
+
     const stepOnce = (step: number) => {
       const t = clock();
       stirAmbient(t, step);
+      stirPulse(step);
       stirGhost(t, step);
       const count = flushDrops();
       const source = targets[read];
@@ -353,7 +364,8 @@ export function CausticPool({
 
     // Flat water is a single flat colour, so run the wave out before the first
     // paint and the pool is already lit the moment anyone sees it.
-    for (let i = 0; i < 6; i++) {
+    // A pulsing pool starts from its own ring, not a scatter of drops.
+    for (let i = 0; i < 6 && resolved.pulsePeriod <= 0; i++) {
       drop(
         0.2 + 0.6 * Math.random(),
         0.2 + 0.6 * Math.random(),
@@ -362,7 +374,9 @@ export function CausticPool({
       );
       if (i % 3 === 2) stepOnce(1 / 60);
     }
-    for (let i = 0; i < 26; i++) stepOnce(1 / 60);
+    // A pulsing pool runs its rings out across the screen first, so it opens already rippling.
+    const warmup = resolved.pulsePeriod > 0 ? 60 * 20 : 26;
+    for (let i = 0; i < warmup; i++) stepOnce(1 / 60);
 
     if (reduced) {
       paint();

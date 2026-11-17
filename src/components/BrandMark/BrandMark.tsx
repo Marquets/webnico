@@ -22,12 +22,9 @@ export function BrandMark({
       <image className={styles.text} href="/logo-nico-text.png" width="510" height="242" />
       <g className={styles.symbol}>
         <image href="/logo-nico-wave.png" width="510" height="242" />
-        {/* On hover the drawn lid swings up over its own line, lashes and all, uncovering the eye. */}
+        {/* On hover the closed eye blinks open into Nico's drawn open eye. */}
         <image className={styles.lid} href="/logo-nico-eye.png" width="510" height="242" />
-        <g className={styles.open}>
-          <path className={styles.stroke} d="M228,151 Q255,178 281,157" />
-          <circle cx="255" cy="156" r="6" fill="#fff" />
-        </g>
+        <image className={styles.open} href="/logo-nico-eye-open.png" x="220" y="125" width="70" height="53.5" />
       </g>
     </svg>
   );

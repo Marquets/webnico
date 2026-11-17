@@ -12,11 +12,12 @@ describe("EncountersPage", () => {
 });
 
 describe("EncountersPage offers", () => {
-  it("presents both kinds of encounter together and marks what is coming soon", () => {
+  it("presents both kinds of encounter together and a number to ask", () => {
     render(<EncountersPage />);
 
     expect(screen.getByRole("heading", { name: /espacios de encuentro en grupo/i })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: /espacios de encuentro contigo/i })).toBeInTheDocument();
-    expect(screen.getAllByText(/próximamente/i)).toHaveLength(2);
+    expect(screen.getByText(/talleres grupales/i)).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /679 667 357/ })).toHaveAttribute("href", "tel:+34679667357");
   });
 });

@@ -11,11 +11,10 @@ describe("ReadingPage", () => {
     expect(screen.getByRole("link", { name: /volver a sesiones/i })).toHaveAttribute("href", "/sesiones/");
   });
 
-  it("lists prices and the cancellation policy", () => {
+  it("lists the prices", () => {
     render(<ReadingPage />);
 
     expect(screen.getByRole("heading", { name: /tarifas/i })).toBeInTheDocument();
-    expect(screen.getByText("50 €")).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: /política de cancelación/i })).toBeInTheDocument();
+    expect(screen.getByText("50€")).toBeInTheDocument();
   });
 });

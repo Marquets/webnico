@@ -1,7 +1,7 @@
 .page {
-  --deep: #1f2b28;
-  background: var(--deep);
-  color: #fff;
+  --ink: #2c2a24;
+  background: #1f2b28;
+  color: var(--ink);
 }
 
 /* Same spot and size as the parked logo on the home page. */
@@ -14,202 +14,198 @@
   mix-blend-mode: difference;
 }
 
-/* Nico kneels left of centre; the line sits over the trees on the right, on a soft shade. */
+/* Nico among the leaves, edge to edge. */
 .hero {
-  min-height: 100svh;
-  scroll-snap-align: start;
+  height: min(100svh, 62vw);
+  min-height: 26rem;
+  background: url("/sobre-mi/nico-retrato.jpg") center 30% / cover no-repeat;
+}
+
+/* The line he starts from, written across a plank of light wood. */
+.motto {
+  margin: 0;
+  padding: clamp(3.5rem, 8vw, 6rem) var(--gutter);
+  background: url("/sobre-mi/madera-clara.jpg") center / cover no-repeat;
+  font-family: var(--hand);
+  font-size: clamp(1.25rem, 2.3vw, 1.85rem);
+  line-height: 1.45;
+  text-align: center;
+  text-wrap: balance;
+}
+
+/* Each part of the story is a band of one colour, with a photo beside it where there is one. */
+.band {
   display: grid;
-  align-items: center;
-  justify-items: end;
-  padding: clamp(6rem, 10vw, 8rem) var(--gutter);
-  background:
-    linear-gradient(to left, rgba(16, 24, 18, 0.62), rgba(16, 24, 18, 0.2) 55%, transparent 75%),
-    url("/sobre-mi/hero-nico.jpg") 35% 25% / cover no-repeat;
+  grid-template-columns: 1.4fr 1fr;
+  min-height: 80svh;
 }
 
-.heroLine {
-  max-width: min(46%, 20ch);
+.olive {
+  background: #a9ae8c;
+}
+
+.lavender {
+  grid-template-columns: 1fr;
+  min-height: 0;
+  background: #dcdde8;
+}
+
+.peach {
+  grid-template-columns: 1fr 1.4fr;
+  background: #d8aa82;
+}
+
+.text {
+  display: grid;
+  align-content: center;
+  gap: 1.1rem;
+  padding: clamp(3rem, 7vw, 6rem) clamp(1.5rem, 6vw, 5.5rem);
+  font-size: clamp(0.95rem, 1.15vw, 1.05rem);
+  line-height: 1.75;
+}
+
+.text p {
+  margin: 0;
+  max-width: 36rem;
+}
+
+.centered {
+  justify-items: center;
+  text-align: center;
+}
+
+.centered p {
+  max-width: 44rem;
+}
+
+.quote {
   font-family: var(--hand);
-  font-size: clamp(2rem, 4.6vw, 4rem);
-  font-weight: 400;
-  line-height: 1.15;
-  text-align: left;
-  text-shadow: 0 2px 24px rgba(8, 14, 12, 0.55);
+  font-size: 1.25em;
 }
 
-@media (max-width: 700px) {
-  .hero {
-    align-items: end;
-    justify-items: center;
-    background:
-      linear-gradient(to bottom, transparent 45%, rgba(16, 24, 18, 0.75)),
-      url("/sobre-mi/hero-nico.jpg") 33% top / cover no-repeat;
-  }
-
-  .heroLine {
-    max-width: none;
-    font-size: 1.8rem;
-    text-align: center;
-  }
+.photo {
+  min-height: 24rem;
+  background: var(--photo) center / cover no-repeat;
 }
 
-.feedSection {
-  padding: clamp(4rem, 8vw, 6rem) var(--gutter) 0;
+/* Two bubbles of light; each opens its answer. */
+.bubbles {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(1.5rem, 5vw, 4rem);
+  margin-top: clamp(1.5rem, 3vw, 2.5rem);
 }
 
-.more {
-  width: min(100%, 72rem);
-  margin: 0 auto;
-  padding: clamp(2.5rem, 5vw, 4rem) var(--gutter) clamp(4rem, 8vw, 6rem);
-}
-
-.more > summary {
-  width: fit-content;
-  margin: 0 auto;
-  padding: 0.55rem 1.6rem;
-  border: 1.5px solid currentColor;
-  border-radius: 999px;
+.bubble {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: clamp(10rem, 15vw, 13rem);
+  aspect-ratio: 1;
+  padding: 1.2rem;
+  overflow: hidden;
+  border: 0;
+  border-radius: 50%;
+  color: var(--ink);
   font-family: var(--hand);
-  font-size: clamp(1rem, 1.4vw, 1.2rem);
-  list-style: none;
+  font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+  line-height: 1.25;
+  text-align: center;
   cursor: pointer;
-  transition: background 0.25s ease, color 0.25s ease;
+  isolation: isolate;
+  box-shadow: 0 12px 30px -14px rgba(44, 42, 36, 0.6);
+  transition:
+    transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.6s ease;
+  animation: float 6s ease-in-out infinite;
 }
 
-.more > summary::-webkit-details-marker {
-  display: none;
+.bubble:nth-child(2) {
+  animation-delay: -3s;
 }
 
-.more > summary:hover,
-.more > summary:focus-visible,
-.more[open] > summary {
-  background: #fff;
-  color: var(--deep);
+.bubble::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  /* Zoomed well past the edges, so only the middle of the light shows and never the photo's own frame. */
+  inset: -40%;
+  background: var(--photo) center / cover no-repeat;
+  transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-.full {
-  padding-top: clamp(3rem, 6vw, 5rem);
+.bubble span {
+  padding: 0.3rem 0.4rem;
+  border-radius: 0.6rem;
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.bubble:hover,
+.bubble:focus-visible {
+  transform: scale(1.06);
+  box-shadow: 0 18px 40px -14px rgba(44, 42, 36, 0.7);
+}
+
+.bubble:hover::before,
+.bubble:focus-visible::before {
+  transform: scale(1.15) rotate(8deg);
+}
+
+@keyframes float {
+  50% {
+    translate: 0 -0.4rem;
+  }
+}
+
+/* The page ends on dark wood: an invitation to talk, then the footer. */
+.end {
+  display: grid;
+  background:
+    linear-gradient(rgba(30, 18, 10, 0.25), rgba(30, 18, 10, 0.4)),
+    url("/sobre-mi/madera-oscura.jpg") center / cover no-repeat;
+  color: #fff;
+  text-shadow: 0 1px 10px rgba(30, 18, 10, 0.5);
+}
+
+.ask {
+  display: grid;
+  justify-items: center;
+  gap: 0.6rem;
+  margin: 0;
+  padding: clamp(4rem, 9vw, 7rem) var(--gutter);
+  font-family: var(--hand);
+  font-size: clamp(1.3rem, 2vw, 1.7rem);
+}
+
+.phone {
+  font-family: var(--sans);
+  font-size: 0.7em;
+  letter-spacing: 0.08em;
+}
+
+.phone:hover,
+.phone:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .more > summary {
+  .bubble,
+  .bubble::before {
+    animation: none;
     transition: none;
   }
 }
 
-.column,
-.wide {
-  display: grid;
-  gap: 1.3rem;
-  margin: 0 auto;
-  font-size: clamp(1.02rem, 1.3vw, 1.15rem);
-  line-height: 1.8;
-}
-
-.column {
-  max-width: 44rem;
-}
-
-.wide {
-  max-width: 72rem;
-}
-
-.heading {
-  font-size: clamp(1.9rem, 3.4vw, 2.8rem);
-  text-align: center;
-}
-
-.lead {
-  margin: 1rem 0 0.5rem;
-  font-family: var(--hand);
-  font-size: clamp(1.45rem, 2.6vw, 2.1rem);
-  font-weight: 400;
-  line-height: 1.35;
-  text-align: center;
-}
-
-.quote {
-  display: grid;
-  gap: 0.4rem;
-  margin: 1.5rem 0;
-  padding: 1.75rem 1.5rem;
-  border-block: 1px solid rgba(255, 255, 255, 0.25);
-  text-align: center;
-}
-
-.quote p {
-  font-family: var(--hand);
-  font-size: clamp(1.6rem, 3vw, 2.4rem);
-  line-height: 1.3;
-}
-
-.quote footer {
-  font-size: 0.85rem;
-  letter-spacing: 0.08em;
-  opacity: 0.65;
-}
-
-.values {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: clamp(1rem, 2vw, 1.5rem);
-  margin: 1.5rem 0 0;
-  padding: 0;
-  list-style: none;
-  counter-reset: value;
-}
-
-.values > li {
-  display: grid;
-  align-content: start;
-  gap: 1rem;
-  padding: clamp(1.75rem, 3vw, 2.5rem);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 22px;
-  background: rgba(255, 255, 255, 0.04);
-  counter-increment: value;
-}
-
-/* Nico's face has no digits, so the counters use the text face. */
-.values > li::before {
-  content: counter(value);
-  font-size: 2.2rem;
-  font-weight: 300;
-  line-height: 1;
-  opacity: 0.5;
-}
-
-.values h3 {
-  font-size: clamp(1.25rem, 1.9vw, 1.55rem);
-  line-height: 1.35;
-}
-
-.tags,
-.questions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.tags li {
-  padding: 0.35rem 1rem;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.1);
-  font-size: 0.92em;
-}
-
-.questions {
-  flex-direction: column;
-  gap: 0.25rem;
-  font-family: var(--hand);
-  font-size: 1.2em;
-}
-
-@media (max-width: 700px) {
-  .values {
+@media (max-width: 760px) {
+  .band,
+  .peach {
     grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .peach .photo {
+    order: 2;
   }
 }
